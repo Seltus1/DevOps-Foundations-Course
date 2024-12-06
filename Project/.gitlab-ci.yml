@@ -1,38 +1,53 @@
-# TODO: Define stages for your pipeline
 stages:
+  - build
+  - deploy
 
-# TODO: Define variables (if needed)
 variables:
+  DOCKER_REGISTRY: "seltus"
+  FRONTEND_IMAGE: "$DOCKER_REGISTRY/frontend-app"
+  BACKEND_IMAGE: "$DOCKER_REGISTRY/backend-app"
 
-# TODO: Define a job for building the frontend
+# Job for building the frontend
 frontend-job:
-  stage: # TODO: Specify stage
-  image: # TODO: Specify Node.js image
+  stage: build
+  image: node:18-alpine  # Use Node.js image for frontend
   script:
-    # TODO: Install dependencies
-    # TODO: Build the React app
+    - cd frontend  # Navigate to the frontend directory
+    - npm install  # Install frontend dependencies
+    - npm run build  # Build the React app (production-ready build)
 
-# TODO: Define a job for building and testing the backend
+# Job for building the backend
 backend-job:
-  stage: # TODO: Specify stage
-  image: # TODO: Specify Python image
+  stage: build
+  image: python:3.12-alpine  # Use Python image for backend
   script:
-    # TODO: Install dependencies
-    # TODO: Run tests
+    - cd backend  # Navigate to the backend directory
+    - pip install -r requirements.txt  # Install backend dependencies
 
-# TODO: Define a job for building Docker images
+# Job for building Docker images and logging into Docker Hub
 docker-build:
-  stage: # TODO: Specify stage
-  image: docker:latest
+  stage: build
+  image: docker:latest  # Use Docker image to build and push containers
   services:
-    - docker:dind
+    - docker:dind  # Docker-in-Docker to enable Docker commands inside CI
   script:
-    # TODO: Build frontend Docker image
-    # TODO: Build backend Docker image
-    # TODO: Push images to Docker Hub (if on main branch)
+    - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin  # Log into Docker Hub
+    - cd backend  # Navigate to the backend directory
+    - docker build -t $BACKEND_IMAGE .  # Build the backend Docker image
+    - cd ../frontend  # Navigate to the frontend directory
+    - docker build -t $FRONTEND_IMAGE .  # Build the frontend Docker image
+    - docker push $BACKEND_IMAGE  # Push the backend Docker image
+    - docker push $FRONTEND_IMAGE  # Push the frontend Docker image
+  only:
+    - main  # Only run on 'main' branch
 
-# OPTIONAL: Define a deployment job (if applicable)
+# Job for deploying the application
 deploy:
-  stage: # TODO: Specify stage
+  stage: deploy
   script:
-    # TODO: Add deployment steps
+    - docker-compose -f docker-compose.yml up -d  # Deploy with Docker Compose (adjust this based on your setup)
+  environment:
+    name: production
+    url: http://localhost:5000/  # Your deployed app URL
+  only:
+    - main  # Only deploy from the 'main' branch

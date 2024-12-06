@@ -5,16 +5,22 @@ version: '3'
 services:
   frontend:
     # Specify the build context for the frontend
+    
     build:
     # Map the host port to the container port
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
     # Specify dependencies (if applicable)
+      -"5000:5000"
     depends_on:
+      - backend
 
     # Additional options (uncomment and configure as needed):
     
     # Specify environment variables if needed
-    # environment:
+    environment:
+       - REACT_APP_API_URL=http://backend:5000/api
     
     # Specify volume for live code reloading (optional)
     # volumes:
@@ -25,19 +31,22 @@ services:
   backend:
     # Specify the build context for the backend
     build:
+      context: ./backend
+      dockerfile: Dockerfile
     # Map the host port to the container port
     ports:
-    
+      -"5000:5000"
     # Additional options (uncomment and configure as needed):
     
     # Specify environment variables if needed
-    # environment:
-    
+    environment:
+      - ENV FLASK_ENV=development
+      - ENV APP_PORT = 5000
     # Specify volume for live code reloading (optional)
     # volumes:
     
     # Specify the command to run the development server (if different from Dockerfile)
-    # command:
+    command: python app.py
 
 # Additional components (uncomment and configure as needed):
 # Define a custom network (if applicable)

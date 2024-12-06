@@ -1,8 +1,8 @@
 # Use an official Node runtime as a parent image
-FROM
+FROM node:16
 
 # Set the working directory in the container
-WORKDIR
+WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY
