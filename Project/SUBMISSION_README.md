@@ -13,6 +13,8 @@
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
 
+### it is a calculator that runs its frontend UI with react and a backend with python
+
 
 - **Which files are you implmenting? and why?:**
 
@@ -20,7 +22,7 @@
 <!-- Include explanation here -->
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
+### DOckerfilesand compose .yaml. They are the files responsible for building the application.
 
 - _**Any other explanations for personal note taking.**_
 
@@ -29,6 +31,7 @@
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
 
+### Docker is its own container. Think as if it is own instance of a os but at a super minimalistic level. Just big enough for code to run
 
 ### Docker Implementation
 
@@ -42,7 +45,7 @@
 <!-- Include explanation here -->
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
+    ### a ptyhon API script that recieves api calls from the api folder using the flask framework
 - **Frontend Dockerfile** (React App):
     - Similar to the above section, please explain the Dockerfile created for the React Frontend Web Application. 
 
@@ -50,7 +53,7 @@
 <!-- Include explanation here -->
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
+    ### React frontend that sends API calls. The numbers are serialized into a json and then sent over
 **Use this section to document your choices and steps for building the Docker images.**
 
 
@@ -70,8 +73,9 @@
 <!-- Include explanation here -->
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
-
+### Docker-compose orchestrates the connection and communication between the two containers. By specifying the ports and the location of the dockerfile 
+### the services communicate via FLask api calls and the numbers are serialized into json and sent over the bridged network. No volumes were used. 
+-- one of the environemtn variables is the default react url
 ### CI/CD Pipeline (YAML Configuration)
 
 **Explain your CI/CD pipeline:**
@@ -89,21 +93,6 @@
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
 
 
-### CI/CD Pipeline (YAML Configuration)
-
-**Simply explain your CI/CD pipeline:**
-
-- What triggers the pipeline (e.g., push to main branch)?
-- What are the different stages (build, test, deploy)?
-- How are Docker images built and pushed to a registry?
-
-**Use this section to document your automated build, and docker process.**
-
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
 
 
 ### Assumptions
@@ -116,7 +105,7 @@
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
 
-
+--- commands are ran from the context of the project/
 ### Lessons Learned
 
 - What challenges did you encounter while working with Docker and CI/CD?
@@ -130,7 +119,7 @@
 <!-- Include explanation here -->
 <!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
 
-
+-- It def was not as easy as i thought it would be. For me to learn the commanbds, i had to understand why and how things happened. Pretty neat afterwaeds
 ### Future Improvements
 
 - How could you improve your Dockerfiles, `docker-compose.yml`, or CI/CD pipeline? 
@@ -146,7 +135,7 @@
 
 
 
-
+-- adding binary conversions and other forms of caluclations can be a neat way to work on fullstack skills
 
 
 <!-- BEST OF LUCK! -->
